@@ -8,7 +8,9 @@ from kivy.properties import StringProperty, NumericProperty, ListProperty, Boole
 from putils import PGDatos
 from api_client.sqldata import SQLData
 
-
+"""
+    El GridField añade soporte para redes de datos que no están en línea editable
+"""
 class GridField(object):
 
     def __init__(self, fldheader="", fldtype="", fldalign="", flddisabled=False, fldwidth=100, flddata=''):
@@ -50,7 +52,9 @@ class GridFields(object):
 
 
 class GridProyecto(FloatLayout):
-    """Inicializa la clase derivada de GridLayout para el manejo de grids"""
+    """
+        Esta funcion inicia la clase derivada de GridLayout para el manejo de grids
+    """
     gHeader = GridLayout
     gBody = GridLayout
     rHeight = NumericProperty(30)
@@ -79,7 +83,9 @@ class GridProyecto(FloatLayout):
             self.addgridrow(datarow)
 
     def addcolumna(self, colheader, rowtype="txt", rowalign="center", colsize=200, coldisable=False, datafield=''):
-        """Agrega una columna al grid"""
+        """
+            Esta funcion agrega una columna al grid
+        """
         # self.colHeaders.append(colheader)
         # self.rowTypes.append(rowtype)
         # self.rowAlign.append(rowalign)
@@ -91,7 +97,9 @@ class GridProyecto(FloatLayout):
 #        self.gfields.columns += 1
 
     def addheaders(self):
-        """Funcion que crea todas las celdas para utilizarse como encabezado de los grids"""
+        """
+            Esta funcion crea las celdas que se utilizaran para el encabezado de los grids
+        """
         gHdr = self.gHeader
         self.filas += 1
         for col in range(self.columnas):
@@ -107,7 +115,9 @@ class GridProyecto(FloatLayout):
             gHdr.add_widget(hdr)
 
     def addgridrow(self, rowdata):
-        """Funcion que agrega todas las celdas por cada fila de un grid de datos"""
+        """
+            Aqui se agregan todas las celdas de cada fila de un grid de datos
+        """
         gBdy = self.gBody
         gBdy.bind(minimum_height=gBdy.setter('height'), minimum_width=gBdy.setter('width'))
         self.filas += 1
@@ -124,7 +134,9 @@ class GridProyecto(FloatLayout):
         self.__rows.addrow(rowdata[self.gfields.key], rowdata[:self.gfields.key] + rowdata[(self.gfields.key + 1):])
 
     def getcellchk(self, fila, columna, Activo, Disabled = False, Size=200, Tipo="chk"):
-        """Funcion que devuelve una celda completa para manejo de checkbox"""
+        """
+            Aqui se devuelve una celda completa para manejo de checkbox
+        """
         cell = GridCCell()
         cell.id = "{0}_row{1}_col{2}".format(Tipo, fila, columna)
         cell.width = Size
@@ -137,7 +149,9 @@ class GridProyecto(FloatLayout):
         return cell
 
     def getcelllabel(self, fila, columna, Texto, Halign='left', Disabled = False, Size=200, Tipo="txt", Valign='middle'):
-        """Funcion que devuelve una celda completa para manejo de etiquitas"""
+        """
+            Esta funcion es para devolver una celda completa para manejo de etiquetas
+        """
         cell = GridCell()
         cell.id = "{0}_row{0}_col{1}".format(Tipo, fila, columna)
         if Tipo == "key":
@@ -153,7 +167,9 @@ class GridProyecto(FloatLayout):
         return cell
 
     def borradoclick(self, cell, value):
-        """Funcion que marca las celdas para el borrado"""
+        """
+            Esta funcion marca las celdas para el borrado
+        """
         cell.borrado = cell.active
         count = 1
         for cella in cell.walk_reverse(loopback=False):
@@ -164,7 +180,9 @@ class GridProyecto(FloatLayout):
                 break
 
     def delGridRow(self, range = "All"):
-        """funcion para borrar celdas de un grid"""
+        """
+            Esta funcion para elimina las celdas de un grid
+        """
         childs = self.gBody.parent.children
         for ch in childs:
             for c in reversed(ch.children):
@@ -175,13 +193,17 @@ class GridProyecto(FloatLayout):
 
 
 class GridHeader(Label):
-    """Inicializa la clase derivada de BoxLayout como base del encabezado de los grids"""
+    """
+        Aqui se inicia la clase derivada de BoxLayout como base del encabezado de los grids
+    """
     height = NumericProperty(40)
     bgcolor = ListProperty([0.4, 0.4, 0.4])
 
 
 class GridCell(Label):
-    """Inicializa la clase derivada de BoxLayout como base de las celdas de datos del grid"""
+    """
+        Aqui se inicia la clase derivada de BoxLayout como base de las celdas de datos del grid
+    """
     key = StringProperty("")
     borrado = BooleanProperty(False)
     height = NumericProperty(30)
@@ -189,7 +211,9 @@ class GridCell(Label):
 
 
 class GridCCell(CheckBox):
-    """Inicializa la clase derivada de BoxLayout como base de las celdas de datos del grid"""
+    """
+        Aqui se inicia la clase derivada de BoxLayout como base de las celdas de datos del grid
+    """
     key = StringProperty("")
     borrado = BooleanProperty(False)
     height = NumericProperty(30)
@@ -198,7 +222,7 @@ class GridCCell(CheckBox):
 
 def convertorgb(color):
     """
-        Funcion que convierte de codigo de colores de Hex a RGB decimal
+        Esta funcion convierte de codigo de colores de Hex a RGB decimal
     """
     __tmplist = []
     if len(color) == 6:
@@ -212,7 +236,7 @@ def convertorgb(color):
 
 class LabelPopup(Label):
     """
-        Objeto de texto principal de la aplicacion, permite modificar el color de fondo, color de texto
+        Este es el objeto de texto principal de la aplicacion, permite modificar el color de fondo, color de texto
         y agregar bordes
     """
     __texto = StringProperty('')
@@ -222,7 +246,7 @@ class LabelPopup(Label):
 
     def __init__(self, **kwargs):
         """
-            Sobre escribe el constructor de objeto Label
+            Esta funcion Sobreescribe el constructor de objeto Label
         """
 
         if 'texto' in kwargs:
@@ -239,7 +263,7 @@ class LabelPopup(Label):
     @property
     def texto(self):
         """
-            Propiedad texto: contiene el texto del objeto
+            Esta propiedad de texto contiene el texto del objeto
         """
         return self.__texto
 
@@ -252,7 +276,7 @@ class LabelPopup(Label):
     @property
     def textocolor(self):
         """
-            Propiedad textocolor: contiene el color del texto en formato RGB Hex
+            La propiedad textocolor contiene el color del texto en formato RGB Hex
         """
         return self.__textocolor
 
@@ -265,7 +289,7 @@ class LabelPopup(Label):
     @property
     def bordercolor(self):
         """
-            Propiedad bordercolor: contiene el color del borde en formato RGB Dec list
+            La propiedad bordercolor contiene el color del borde en formato RGB Dec list
         """
         return self.__bordercolor
 
@@ -281,7 +305,7 @@ class LabelPopup(Label):
     @property
     def backcolor(self):
         """
-            Propiedad backcolor: contiene el color del fondo en formato RGB Dec List
+            La propiedad backcolor contiene el color del fondo en formato RGB Dec List
         """
         return self.__backcolor
 
@@ -296,7 +320,7 @@ class LabelPopup(Label):
 
     def update_canvas(self, *args):
         """
-            Actualiza el borde y el fondo de el objeto cada vez que cambie de tamanio o lugar
+            Esta funcion actualiza el borde y el fondo de el objeto cada vez que cambie de tamano o lugar
         """
         if len(self.bordercolor) > 0:
             self.linecolor.rgb = self.bordercolor
@@ -309,28 +333,28 @@ class LabelPopup(Label):
 
     def textocolorrgb(self, value):
         """
-            Funcion para convertir colores RGB de Hex a Dec List
+            Esta funcion sirve convertir colores RGB de Hex a Dec List
         """
         return convertorgb(value)
 
 
 class LabelSPopup(LabelPopup):
     """
-        Objeto derivado de LabelPopup
+        Este objeto es derivado de LabelPopup
     """
     pass
 
 
 class PopupParcial(Popup):
     """
-        Objeto que cambia el fondo de los Popup en la aplicacion
+        Este objeto cambia el fondo de los Popup en la aplicacion
     """
     pass
 
 
 class PopupContent(FloatLayout):
     """
-        Objeto de contenido de los Popup de la Aplicacion, agrega una imagen en conjunto de un Label con
+        Este objeto contiene los Popup de la Aplicacion, agrega una imagen en conjunto de un Label con
         su fondo y bordes
     """
     mensaje = ObjectProperty(None)
@@ -340,7 +364,7 @@ class PopupContent(FloatLayout):
 
     def __init__(self, **kwargs):
         """
-            Sobre escribe constructor de la clase para agregar funcionalidad en caso de configurar algunas
+            Sobreescribe constructor de la clase para agregar funcionalidad en caso de configurar algunas
             propiedades
         """
         if 'texto' in kwargs:
@@ -358,7 +382,7 @@ class PopupContent(FloatLayout):
 
 def showmessagebox(Titulo, Mensaje, Tipo=1):
     """
-        Funcion que despliega un Popup Window para mensajes de la aplicacion
+        Esta funcion despliega un Popup Window para mensajes de la aplicacion
     """
     label = ObjectProperty(None)
     if Tipo == 0:
@@ -380,7 +404,7 @@ class LabelProyecto(LabelPopup):
 
 class ButtonDropDown(Button):
     """
-        Objeto para el uso del dropdown, agrega funcionalidad de datos
+        Este objeto es para el uso del dropdown, agrega funcionalidad de datos
     """
     data = ListProperty()
 
@@ -394,7 +418,7 @@ class ButtonDropDown(Button):
 
 class DropParcial(Button):
     """
-        Objeto que modifica un boton para agregarle funciones de dropdown y manejo de datos
+        Esto modifica un boton para agregar funciones de dropdown y manejo de datos
     """
     __datasource = ListProperty()
     origen = StringProperty('')
@@ -404,7 +428,7 @@ class DropParcial(Button):
     @property
     def datasource(self):
         """
-            Propiedad datasource: obtiene datos de la fuente de datos y los agrega al dropdown utilizando
+            La propiedad datasource obtiene datos de la fuente de datos y los agrega al dropdown utilizando
             botones
         """
         return self.__datasource
@@ -425,7 +449,7 @@ class DropParcial(Button):
 
     def on_options(self, instance, value):
         """
-            Evento que se acttiva al agregar opciones al dropdown
+            Esto se activa al agregar opciones al dropdown
         """
         ddn = self.drop_down
         ddn.clear_widgets()
@@ -435,7 +459,7 @@ class DropParcial(Button):
 
     def on_select(self, *args):
         """
-            Evento que se activa al seleccionar una opcion en el dropdown
+            Esto se activa al seleccionar una opcion en el dropdown
         """
         self.text = args[1][1]
         self.origen = args[1][2]
@@ -443,7 +467,7 @@ class DropParcial(Button):
 
     def on_touch_up(self, touch):
         """
-            Evento que despliega el dropdown al apretar el boton principal
+            Esto despliega el dropdown al presionar el boton principal
         """
         if touch.grab_current == self:
             self.drop_down.open(self)

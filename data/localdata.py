@@ -14,7 +14,7 @@ class LocalData(object):
 
     def conectar(self):
         """
-            Inicia la coneccion con el archivo de la base de datos, lo crea de no existir este
+            Es para iniciar la coneccion con el archivo de la base de datos y lo crea si este no existe
         """
         try:
             self.__conn = sql3.connect(self.getfilename())
