@@ -39,12 +39,12 @@
 #### Favor anotarse para las tareas que mejor le vengan a sus conocimientos y fortalezas
 
 	Nombre					Tarea
-	Julio Lerma
+	Julio Lerma                 3
 	Bolivar Gonzalez
-	Dario Sanchez
-	Eliecer Samaniego
+	Dario Sanchez               5
+	Eliecer Samaniego           4
 	Floyd Perez
 	Kadhir Arauz
-	Moises Mirasabal
-	Rodrigo Vergara
+	Moises Mirasabal            1
+	Rodrigo Vergara             2
 
